@@ -7,7 +7,7 @@ public class Pikachu {
 		System.out.println("\tPikachu welcomes you to the world of Pokemon!");
 		System.out.println("\t\t\t  (\\__/)");
 		System.out.println("\t\t\t  (o^-^)");
-		System.out.println("\t\t\t z(\")(\")");
+		System.out.println("\t\t\tz(\")(\")");
 	}
 
 }
