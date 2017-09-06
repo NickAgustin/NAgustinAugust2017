@@ -4,7 +4,10 @@ September 1st, 2017
 */
 public class GPA {
 	public static void main(String[] args) {
-		double realGPA = calcGPA(3.5, 4.0, 3.0, 4.0, 3.5);
+		calc();
+	}
+	public static void calc() {
+		double realGPA = calcGPA(4.0, 3.0, 3.0, 4.0, 4.0);
 		System.out.println(realGPA);
 		
 	}
