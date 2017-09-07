@@ -45,6 +45,26 @@ public class Calculate {
 		return discriminant;
 	}
 	
-	//Turn a Mixed Number into and an Improper Fraction
-	public static int toImproperFrac(int operandA, double operandB, double operandC);
+	//Turn a Mixed Number into an Improper Fraction
+	public static String toImproperFrac(int operandA, int operandB, int operandC) {
+		int toImproperFrac = (operandA * operandC + operandB);
+		int denominator = operandC;
+		return toImproperFrac +"/" +denominator;
+	}
+	//Turn an Improper Fraction into a Mixed Number
+	public static String toMixedNum(int operandA, int operandB) {
+		int numerator = (operandA%operandB);
+		int toMixedNumTwo = operandA-numerator;
+		int toMixedNum = toMixedNumTwo/operandB;
+		int denominator = operandB;
+		return toMixedNum +"_" +numerator +"/" +denominator;
+	}
+	public static String Foil(int operandA, int operandB, int operandC, int operandD, String operandL ) {
+		String foilF = (operandA*operandC +operandL +"^2");
+		String foilOI = (operandA*operandD+operandB*operandC +operandL);
+		int foilL = (operandB*operandC);
+		return foilF +"+" +foilOI +"+" +foilL;
+	
+	}
+		
 }
