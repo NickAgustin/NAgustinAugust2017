@@ -64,7 +64,90 @@ public class Calculate {
 		String foilOI = (operandA*operandD+operandB*operandC +operandL);
 		int foilL = (operandB*operandC);
 		return foilF +"+" +foilOI +"+" +foilL;
+		}
+	public static boolean isDivisibleBy(int operandOne, int operandTwo) {
+		int divisibleRemainder = (operandOne%operandTwo);
+		if (divisibleRemainder==0) {
+			System.out.println("The numbers are divisible!");
+		}
+		else if (divisibleRemainder!=0) {
+			System.out.println("The numbers are not divisible!");
+		}
+		return false;
+		}
 	
-	}
+	public static double absValue(double operand) {
+		if(operand>0) {
+			double absValue = operand;
+			return absValue;
+		}
+		else if (operand<0) {
+			double absValue = operand*-1;
+			return absValue;
+		}
+		else if (operand==0) {
+			double absValue = 0;
+			return absValue;
+		}
+		return operand;
 		
-}
+	}
+	public static double max(double operandOne, double operandTwo) {
+			if(operandOne>operandTwo) {
+				double max = operandOne;
+						return max;
+			}
+			else if(operandOne<operandTwo) {
+				double max = operandTwo;
+						return max;
+			}
+			return operandTwo;
+				}
+			public static double max(double operandOne, double operandTwo, double operandThree) {
+				if(operandOne>operandTwo) {
+					return operandOne;
+					}
+				else if(operandOne<operandTwo) {
+					return operandTwo;
+				}
+				if(operandOne>operandThree) {
+					double max = operandOne;
+							return max;
+				}
+				else if (operandOne<operandThree) {
+					double max = operandThree;
+					return max;
+				}
+				if(operandTwo>operandThree) {
+					double max = operandTwo;
+					return max;
+				}
+				else if(operandTwo<operandThree) {
+					double max = operandThree;
+					return max;
+				}
+				return operandThree;
+		}
+			public static double min(double operandOne, double operandTwo) {
+				if(operandOne>operandTwo) {
+					double min = operandTwo;
+							return min;
+				}
+				else if(operandOne<operandTwo) {
+					double min = operandOne;
+							return min;
+				}
+				return operandTwo;
+			}			
+			public static double round2(double operand) {
+				
+				return round2;
+			}
+			public static double exponent(double operandOne, int operandTwo) {
+				double x = 1;
+				for (int i = 0; i<operandTwo; i++) {
+					x = (x*operandOne);
+			}
+				return x;
+		}
+	}
