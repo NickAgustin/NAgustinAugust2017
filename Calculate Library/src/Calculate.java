@@ -140,7 +140,15 @@ public class Calculate {
 				return operandTwo;
 			}			
 			public static double round2(double operand) {
-				
+				double round2 = 0.0;
+				int tempInt = (int) (operand*100);
+				int roundNum = tempInt % 10;
+				tempInt = tempInt / 10;
+				if(roundNum >= 5 && tempInt > 0) {
+					tempInt++;}
+				else if (roundNum <= -5 && tempInt < 0);{
+					tempInt--; }
+				round2 = tempInt / 100.00;
 				return round2;
 			}
 			public static double exponent(double operandOne, int operandTwo) {
@@ -150,4 +158,12 @@ public class Calculate {
 			}
 				return x;
 		}
+			public static int factorial(int operand) {
+				int product = 1;
+				System.out.println(product);
+				for (int i = 0; i <= operand; i++) {
+				product = product * i;
+				}
+				return product;
+			}
 	}
