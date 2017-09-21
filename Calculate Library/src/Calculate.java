@@ -166,4 +166,19 @@ public class Calculate {
 				}
 				return product;
 			}
-	}
+			public static double sqrt(int operand) { 
+				double squareRoot = operand / 2;
+					double t = squareRoot;
+					squareRoot = (t + (operand / t)) / 2;
+					while ((t - squareRoot) != 0);
+			 
+				return squareRoot;
+			}
+			public static double quadForm(int operandA, int operandB, int operandC) {
+				double root = (operandB * operandB - 4 * operandA * operandC);
+				if(root<0) {
+					System.out.println("There are no real roots!");
+				}
+				return root;
+				}
+}
