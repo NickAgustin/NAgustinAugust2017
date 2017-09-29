@@ -196,19 +196,36 @@ public class Calculate {
             if (operandOne == 0) return operandTwo;
             else return operandOne;
 	}
-	//Returns an approximation of the square root of the value passed, rounded to two decimal places!
-	public static double sqrt(int operand) { 
-		double squareRoot = operand / 2;
-		double t = squareRoot;
-			squareRoot = (t + (operand / t)) / 2;
-		while ((t - squareRoot) != 0); 
-		return squareRoot;
-	}
-	public static String quadForm(int operandA, int operandB, int operandC) {
-		double root = (operandB * operandB - 4 * operandA * operandC);
-			if(root<0) {
-				System.out.println("There are no real roots!");
-			}
-			return null;
-		}
-}
+	//Returns an approximation of the square root of the value passed, rounded to two decimal places! 
+		 public static double sqrt(double operand) {
+			 if (operand < 0) {
+				double t;
+				double squareRoot = operand / 2;
+			 
+				do {t = squareRoot;
+					squareRoot = (t + (operand / t)) / 2;
+				} while ((t - squareRoot) != 0);
+			 
+				return squareRoot;
+			 }
+		 }
+	// This takes the coefficients in the quadratic formula and calculates the roots using the quadratic equation!	
+		 public static String quadForm(int operandA, int operandB, int operandC) {
+			 double ad = operandA;
+			 double bd = operandB;
+			 double cd = operandC;
+			 double xd = 0;
+			 double d = Calculate.discriminant(ad, bd, cd);
+		    if(d > 0) {
+		    	return "no real roots";
+		    }
+		    else {
+		    	if (d == 0) {
+		    		xd = Calculate.round2((-operandB/(2*operandA)));
+		    		return "" + xd;
+		    	}
+		    	else {
+		    		double firstroot = Calculate.round2((- operandB + Calculate.sqrt(d))/(2*operandA));
+		    		double secondroot = Calculate.round2((- operandB - Calculate.sqrt(d))/(2*operandA));
+		    		return "roots = " + firstroot + " " + secondroot;
+		    	}
