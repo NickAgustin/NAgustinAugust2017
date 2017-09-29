@@ -1,5 +1,6 @@
 /*Nick Agustin
- * September 6th, 2017
+ * September 29th, 2017
+ * Period 2
  * Our self written math library! It contains a series of methods to do basic math functions!
  */
 
@@ -185,7 +186,6 @@ public class Calculate {
 		return true;
 	}
 	//Finds the greatest common factor of two integers!
-	//COME BACK TO THIS!!!
 	public static int gcf(int operandOne, int operandTwo) {
 		while (operandOne != 0 && operandTwo != 0){
 			if (operandOne >= operandTwo){
@@ -197,27 +197,25 @@ public class Calculate {
             else return operandOne;
 	}
 	//Returns an approximation of the square root of the value passed, rounded to two decimal places! 
-		 public static double sqrt(double operand) {
-			 if (operand < 0) {
-				double t;
-				double squareRoot = operand / 2;
-			 
-				do {t = squareRoot;
-					squareRoot = (t + (operand / t)) / 2;
+	public static double sqrt(double operand) {
+		if (operand < 0) {
+			double t;
+			double squareRoot = operand / 2;
+			do {t = squareRoot;
+				squareRoot = (t + (operand / t)) / 2;
 				} while ((t - squareRoot) != 0);
-			 
-				return squareRoot;
+			 	return squareRoot;
 			 }
-		 }
+			return operand;}
 	// This takes the coefficients in the quadratic formula and calculates the roots using the quadratic equation!	
-		 public static String quadForm(int operandA, int operandB, int operandC) {
-			 double ad = operandA;
-			 double bd = operandB;
-			 double cd = operandC;
-			 double xd = 0;
-			 double d = Calculate.discriminant(ad, bd, cd);
-		    if(d > 0) {
-		    	return "no real roots";
+	public static String quadForm(int operandA, int operandB, int operandC) {
+		double ad = operandA;
+		double bd = operandB;
+		double cd = operandC;
+		double xd = 0;
+		double d = Calculate.discriminant(ad, bd, cd);
+		   if(d > 0) {
+		    return "no real roots";
 		    }
 		    else {
 		    	if (d == 0) {
@@ -227,5 +225,8 @@ public class Calculate {
 		    	else {
 		    		double firstroot = Calculate.round2((- operandB + Calculate.sqrt(d))/(2*operandA));
 		    		double secondroot = Calculate.round2((- operandB - Calculate.sqrt(d))/(2*operandA));
-		    		return "roots = " + firstroot + " " + secondroot;
-		    	}
+		    		return "roots = " + firstroot + " " + secondroot;}
+		    }
+		  
+		 }
+}
