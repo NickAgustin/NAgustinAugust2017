@@ -1,8 +1,5 @@
 
 public class Quadratic {
-
-	public static void main(String[] args) {
-	}
 	public static String quadForm(int operandA, int operandB, int operandC) {
 		double ad = operandA;
 		double bd = operandB;
@@ -15,7 +12,8 @@ public class Quadratic {
 			String Open = ("Down");
 		}
 		double axisOfSymmetry = -bd / 2*(ad);
-		//  h = –b/2a   k = (4ac – b2) / 4a.
+		double vx = (-1 * bd) /(2 * ad);
+		double vy = (((4 * ad * cd) - (bd * 2)) - 4 * ad);
 		double d = Calculate.discriminant(ad, bd, cd);
 		   if(d > 0) {
 		    String roots = ("No real roots!");
@@ -38,5 +36,7 @@ public class Quadratic {
 		return String;
 		  
 		 }
+	public static void main(String[] args) {
+	}
 }
 
