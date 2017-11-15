@@ -1,3 +1,6 @@
+//Nick Agustin
+//November 6th, 2016
+//APCS 2
 import java.util.Arrays;
 
 public class ArraysLab3 {
@@ -13,7 +16,7 @@ public class ArraysLab3 {
 		int[] arrAppend = new int[arr.length + 1];
 		for(int i = 0; i < arr.length; i++) {
 			arrAppend[i] = arr[i];
-			arrAppend[arr.length - 1] = num;
+			arrAppend[arr.length] = num;
 		}
 		return arrAppend;
 	}
@@ -31,14 +34,14 @@ public class ArraysLab3 {
 	public static int sumEven(int[] arr) {
 		int sum = 0;
 		for(int i = 0; i < arr.length; i+=2) {
-			sum = arr[i];
+			sum = sum + arr[i];
 		}
 		return sum;
 	}
 	public static void rotateRight(int[] arr){
 		int endValue = arr[arr.length - 1];
-		for(int i = 0; i < arr.length; i++) {
-		arr[i + 1] = arr[i];
+		for(int i = arr.length - 1; i > 0; i--) {
+		arr[i] = arr[i - 1];
 		}
 		arr[0] = endValue;
 	}

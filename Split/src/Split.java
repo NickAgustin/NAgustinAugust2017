@@ -24,12 +24,12 @@ System.out.println(Split.sandwhich("applespineapplesbreadlettustomatobaconmayoha
 * What if it's a fancy sandwich with multiple pieces of bread?
 */
 public static String sandwhich(String Components) {
-String [] insideComponents = new String[3];
-String components = (Arrays.toString(Components.split("bread")));
-insideComponents [1] = components;
-String sandwhich = insideComponents [1];
-return sandwhich;
-
+String[] arr = Components.split("bread");
+String sandwich = "";
+for(int i = 0; i < arr.length - 2; i++) {
+	sandwich = sandwich + arr[i+1];
+}
+return sandwich;
 }
 
 
@@ -38,4 +38,16 @@ return sandwhich;
 * use String.split to split up the sandwich at the spaces, " ", and return what's in the middle of the sandwich and ignores what's on the outside
 * Again, what if it's a fancy sandwich with multiple pieces of bread?
 */
+public static String complicatedSandwhich(String Components) {
+String[] arr = Components.split(" ");
+for(int i = 0; i < arr.length - 1; i++) {
+	String ingredients = ingredients + arr[i];
+}
+String[] array = ingredients.split("bread");
+String complicatedSandwich = "";
+for(int i = 0; i < arr.length - 2; i++) {
+	complicatedSandwich = complicatedSandwich + arr[i+1];
+}
+return complicatedSandwich;
 	}
+}
