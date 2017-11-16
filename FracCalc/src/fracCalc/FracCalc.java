@@ -32,29 +32,21 @@ public class FracCalc {
     //      e.g. return ==> "1_1/4"
     public static String produceAnswer(String input){ 
     	
-    	String whole = "0";
-    	String numerator = "0";
-    	String denominator = "1";
+    	String answerFraction = "0/0";
     	
     	String[] array1 = input.split(" ");
+    	String operand1 = array1[0];
+    	String operator = array1[1];
     	String operand2 = array1[2];
-    	int underscoreCheck = operand2.indexOf("_");
+    	/*int underscoreCheck = operand2.indexOf("_");
     	
     	if(underscoreCheck >= 0) {
-    		String[] array2 = operand2.split("_");
-    		if(array2[0] != "") {
-    			whole = array2[0];
-    		}
-    		String fraction = array2[1];
+    			whole = FracCalc.underscoreSplit(operand2)[0];
+    		String fraction = FracCalc.underscoreSplit(operand2)[1];
     		int backslashCheck = fraction.indexOf("/");
     		    if(backslashCheck >= 0){
-    		    	String[] array3 = fraction.split("/");
-    		    	if(array3[0] != "") {
-    		    		numerator = array3[0];
-    		    	}
-    		    	if(array3[1] != "") {
-    		    		denominator = array3[1];
-    		    	}
+    		    	numerator = FracCalc.backslashSplit(fraction)[0];
+    		    	denominator = FracCalc.backslashSplit(fraction)[1];
     		    }
     	}
     	if(underscoreCheck < 0) {
@@ -63,17 +55,27 @@ public class FracCalc {
     			whole = operand2;
     		}
     		else if(backslashCheck >= 0){
-    			String[] array3 = operand2.split("/");
-    			if(array3[0] != "") {
-    				numerator = array3[0];
-    			}
-    			if(array3[1] != "") {
-    				denominator = array3[1];
-    			}
+    			numerator = FracCalc.backslashSplit(operand2)[0];
+    			denominator = FracCalc.backslashSplit(operand2)[1];
     		}
-    	}
-    	String statement = "whole:" + whole + " numerator:" + numerator + " denominator:" + denominator;
-		return statement;
+    	}*/
+    	String answer = answerFraction;
+		return answer;
+    }
+    public static String[] underscoreSplit(String operand){
+		String[] usArray = operand.split("_");
+		return usArray;
+    }
+    public static String[] backslashSplit(String operand){
+    		String[] bsArray = operand.split("/");
+    		return bsArray;
+    }
+    public static String addition(String operand1, String operand2) {
+    	FracCalc.
+		return answer;
+    }
+    public static String multiplication(String operand1, String operand2) {
+		return answer;
     }
 }
     // TODO: Fill in the space below with any helper methods that you think you will need
