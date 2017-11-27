@@ -7,7 +7,7 @@ public class FracCalc {
 		System.out.println("Insert Your Equation");
 		Scanner input  = new Scanner(System.in);
 		String userInput = input.nextLine();
-		 while (userInput.equals("quit")!= true){
+		 while (userInput.equals("quit")!= true) {
 			String answer = produceAnswer(userInput);
 			System.out.println(answer);
 			userInput = input.nextLine();
@@ -33,22 +33,22 @@ public class FracCalc {
     	String operandFirst[] = splitOperand(operand1);
     	String operandSecond[] = splitOperand(operand2);
     	if(operator.equals("+")) {
-    		answer = toMixedNum(addition(operandFirst, operandSecond));
+    		answer = addition(operandFirst, operandSecond);
     	}
     		else if(operator.equals("-")){
-    			answer = toMixedNum(subtraction(operandFirst, operandSecond));
+    			answer = subtraction(operandFirst, operandSecond);
     		}
     		else if(operator.equals("*")) {
-    			answer = toMixedNum(multiplication(operandFirst, operandSecond));
+    			answer = multiplication(operandFirst, operandSecond);
     		}
     	
     		else if(operator.equals("/")) {
-    			answer = toMixedNum(division(operandFirst, operandSecond));
+    			answer = division(operandFirst, operandSecond);
     		}
     	return answer;
     }
     
-public static String toMixedNum(int[] answer) {
+/*public static String toMixedNum(int[] answer) {
 		String reducedAnswer;
 		int GCF = gcf(answer[0],answer[1]);
 		if(GCF!=1) {
@@ -89,6 +89,7 @@ public static String toMixedNum(int[] answer) {
 					    		
 	   	return reducedAnswer;
 	}
+	*/
     
     public static String[] splitOperand(String operand){
     	String[] splitOperand = new String[3];
@@ -109,105 +110,143 @@ public static String toMixedNum(int[] answer) {
     	}
     	return splitOperand;
     }
-    
-    
-    public static int[] addition(String[] operand1, String[] operand2) {
+    public static String addition(String[] operand1, String[] operand2) {
+    	int[] firstFraction = new int[2];
     	int firstWhole = Integer.valueOf(operand1[0]);
     	int firstNumerator = Integer.valueOf(operand1[1]);
     	int firstDenominator = Integer.valueOf(operand1[2]);
-    	firstNumerator = toImproperFrac(firstWhole, firstDenominator, firstNumerator);
-    
+    	if(firstWhole == 0) {
+    		firstFraction[0] = firstNumerator;
+    		firstFraction[1] = firstDenominator;
+    	}
+    	else {
+    		firstFraction = toImproperFrac(firstWhole, firstDenominator, firstNumerator);
+    	}
+
+    	int[] secondFraction = new int[2];
     	int secondWhole = Integer.valueOf(operand2[0]);
     	int secondNumerator = Integer.valueOf(operand2[1]);
     	int secondDenominator = Integer.valueOf(operand2[2]);
-    	secondNumerator = toImproperFrac(secondWhole, secondDenominator, secondNumerator);  
+    	if(secondWhole == 0) {
+    		secondFraction[0] = secondNumerator;
+    		secondFraction[1] = secondDenominator;
+    	}
+    	else {
+    		secondFraction = toImproperFrac(secondWhole, secondDenominator, secondNumerator); 
+    	}
     	
-    	int finalNumerator = (firstNumerator * secondDenominator) + (secondNumerator * firstDenominator);
+    	int finalNumerator = (firstFraction[0] * secondFraction[1]) + (secondFraction[0] * firstFraction[1]);
     	int finalDenominator = (firstDenominator * secondDenominator);
-    	int[] answer = new int[2];
+    	String answer = (finalNumerator + "/" + finalDenominator);
+    	/*int[] answer = new int[2];
     	answer [0] = finalNumerator;
     	answer [1] = finalDenominator;
+    	*/
     	
 		return answer;
     }
     
-    public static int[] subtraction(String[] operand1, String[] operand2) {
+    public static String subtraction(String[] operand1, String[] operand2) {
+    	int[] firstFraction = new int[2];
     	int firstWhole = Integer.valueOf(operand1[0]);
     	int firstNumerator = Integer.valueOf(operand1[1]);
     	int firstDenominator = Integer.valueOf(operand1[2]);
-    	firstNumerator = toImproperFrac(firstWhole, firstDenominator, firstNumerator); 
-    
+    	if(firstWhole == 0) {
+    		firstFraction[0] = firstNumerator;
+    		firstFraction[1] = firstDenominator;
+    	}
+    	else {
+    		firstFraction = toImproperFrac(firstWhole, firstDenominator, firstNumerator);
+    	}
+    	
+    	int[] secondFraction = new int[2];
     	int secondWhole = Integer.valueOf(operand2[0]);
     	int secondNumerator = Integer.valueOf(operand2[1]);
     	int secondDenominator = Integer.valueOf(operand2[2]);
-    	secondNumerator = toImproperFrac(secondWhole, secondDenominator, secondNumerator);  
+    	if(secondWhole == 0) {
+    		secondFraction[0] = secondNumerator;
+    		secondFraction[1] = secondDenominator;
+    	}
+    	else {
+    		secondFraction = toImproperFrac(secondWhole, secondDenominator, secondNumerator); 
+    	} 
     	
-    	int finalNumerator = (firstNumerator * secondDenominator) - (secondNumerator * firstDenominator);
+    	int finalNumerator = (firstFraction[0] * secondFraction[1]) - (secondFraction[0] * firstFraction[1]);
     	int finalDenominator = (firstDenominator * secondDenominator);
-    	int[] answer = new int[2];
-    	answer [0] = finalNumerator;
-    	answer [1] = finalDenominator;
+    	String answer = (finalNumerator + "/" + finalDenominator);
     	
 		return answer;
     }
     
-    public static int[] multiplication(String[] operand1, String[] operand2) {
+    public static String multiplication(String[] operand1, String[] operand2) {
+    	int[] firstFraction = new int[2];
     	int firstWhole = Integer.valueOf(operand1[0]);
     	int firstNumerator = Integer.valueOf(operand1[1]);
     	int firstDenominator = Integer.valueOf(operand1[2]);
-    	firstNumerator = toImproperFrac(firstWhole, firstDenominator, firstNumerator); 
-    
+    	if(firstWhole == 0) {
+    		firstFraction[0] = firstNumerator;
+    		firstFraction[1] = firstDenominator;
+    	}
+    	else {
+    		firstFraction = toImproperFrac(firstWhole, firstDenominator, firstNumerator);
+    	} 
+    	
+    	int[] secondFraction = new int[2];
     	int secondWhole = Integer.valueOf(operand2[0]);
     	int secondNumerator = Integer.valueOf(operand2[1]);
     	int secondDenominator = Integer.valueOf(operand2[2]);
-    	secondNumerator = toImproperFrac(secondWhole, secondDenominator, secondNumerator); 
+    	if(secondWhole == 0) {
+    		secondFraction[0] = secondNumerator;
+    		secondFraction[1] = secondDenominator;
+    	}
+    	else {
+    		secondFraction = toImproperFrac(secondWhole, secondDenominator, secondNumerator); 
+    	}
     	
-    	int finalNumerator = firstNumerator * secondNumerator;
-    	int finalDenominator = (firstDenominator * secondNumerator);
-    	int[] answer = new int[2];
-    	answer [0] = finalNumerator;
-    	answer [1] = finalDenominator;
+    	int finalNumerator = firstFraction[0] * secondFraction[0];
+    	int finalDenominator = (firstFraction[1] * secondFraction[1]);
+    	String answer = (finalNumerator + "/" + finalDenominator);
     	
 		return answer;
     }
     
-    public static int[] division(String[] operand1, String[] operand2) {
+    public static String division(String[] operand1, String[] operand2) {
+    	int[] firstFraction = new int[2];
     	int firstWhole = Integer.valueOf(operand1[0]);
     	int firstNumerator = Integer.valueOf(operand1[1]);
     	int firstDenominator = Integer.valueOf(operand1[2]);
-    	firstNumerator = toImproperFrac(firstWhole, firstDenominator, firstNumerator); 
+    	if(firstWhole == 0) {
+    		firstFraction[0] = firstNumerator;
+    		firstFraction[1] = firstDenominator;
+    	}
+    	else {
+    		firstFraction = toImproperFrac(firstWhole, firstDenominator, firstNumerator);
+    	}
     
+    	int[] secondFraction = new int[2];
     	int secondWhole = Integer.valueOf(operand2[0]);
     	int secondNumerator = Integer.valueOf(operand2[1]);
     	int secondDenominator = Integer.valueOf(operand2[2]);
-    	secondNumerator = toImproperFrac(secondWhole, secondDenominator, secondNumerator); 
+    	if(secondWhole == 0) {
+    		secondFraction[0] = secondNumerator;
+    		secondFraction[1] = secondDenominator;
+    	}
+    	else {
+    		secondFraction = toImproperFrac(secondWhole, secondDenominator, secondNumerator); 
+    	} 
     	
-    	int finalNumerator = firstNumerator * secondDenominator;
-    	int finalDenominator = (firstDenominator * secondNumerator);
-    	int[] answer = new int[2];
-    	answer [0] = finalNumerator;
-    	answer [1] = finalDenominator;
+    	int finalNumerator = firstFraction[0] * secondFraction[1];
+    	int finalDenominator = firstFraction[1] * secondFraction[0];
+    	String answer = (finalNumerator + "/" + finalDenominator);
     	
     	return answer; 
     }
     
-    public static int toImproperFrac(int operandA, int operandB, int operandC) {
-		int toImproperFrac = (operandA * operandC + operandB);
-		return toImproperFrac;
-    }
-    public static int gcf(int operandOne, int operandTwo) {
-		while (operandOne != 0 && operandTwo != 0){
-			if (operandOne >= operandTwo){
-				operandOne= operandOne - operandTwo;
-            }
-            else operandTwo = operandTwo - operandOne;
-            }
-            if (operandOne == 0) return operandTwo;
-            else return operandOne;
+    public static int[] toImproperFrac(int operandA, int operandB, int operandC) {
+    	int[] fraction = new int[2];
+		fraction[0] = (operandA * operandC);
+		fraction[1] = operandB;
+		return fraction;
 	}
-    
-    //public static String multiplication(String operand1, String operand2) {
-		//return answer;
-    //
 }
     // TODO: Fill in the space below with any helper methods that you think you will need
