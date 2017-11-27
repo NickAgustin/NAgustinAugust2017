@@ -1,3 +1,6 @@
+//Nick Agustin
+//November 27th, 2016
+//APCS 2
 package fracCalc;
 import java.util.*;
 import java.util.Scanner;
