@@ -8,28 +8,19 @@ public class SpreadsheetLocation implements Location{
 	private int numberOfColumns = 12;
 	private int rowNumber;
 	private int columnNumber;
+	private String location;
 
 	public int getRow(){
-		return 0;
+		this.rowNumber = Integer.parseInt(location.substring(1));
+		return rowNumber - 1;
 	}
 
 	public int getCol(){
-		return 0;
+		this.columnNumber = location.charAt(0);
+		return columnNumber - 65;
 	}
 
 	public SpreadsheetLocation(String cellName){
-		char rowLetter = cellName.charAt(0);
-		int columnNumber = Integer.valueOf(cellName.substring(1 ,  cellName.length() - 1));
-		for(char check = 'a'; check < (char) ('a' + numberOfRows); check++) {
-			if(rowLetter == check) {
-				this.rowNumber = rowLetter - 96;
-			}
-		}
-		for(int check = 0; check < numberOfColumns; check++) {
-			if(columnNumber == check) {
-				this.columnNumber = columnNumber;
-			}
-		}
-		
+		location = cellName.toUpperCase();
 	}
 }
