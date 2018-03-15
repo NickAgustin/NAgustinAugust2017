@@ -6,7 +6,7 @@ public class Spreadsheet implements Grid{
 
 	private static int numberOfRows = 20;
 	private static int numberOfColumns = 12;
-	private String command = "";
+	private String printCommand = "";
 	static Cell [][] spreadsheet = new Cell[numberOfRows][numberOfColumns];
 
 	public Spreadsheet() {
@@ -16,38 +16,40 @@ public class Spreadsheet implements Grid{
 			}
 		}
 	}
-
 	public String processCommand(String command){
-		if(command.length() <= 3) {
+		if(command == "quit") {
+			printCommand = "quit";
+		}
+		if(command.length() <= 3 && command.length() != 0) {
 			SpreadsheetLocation contents = new SpreadsheetLocation(command);
 			Cell print = getCell(contents);
-			return print.fullCellText();
+			printCommand = print.fullCellText();
 		}
-		if(command.contains("=")){
-			String Location = command.substring(0, (command.indexOf("=") - 1));
-			SpreadsheetLocation cell = new SpreadsheetLocation(command);
-			Cell input = new TextCell(command.substring(command.indexOf("=") + 2, command.length() - 1));
-			spreadsheet[cell.getRow()][cell.getCol()] = input;
-			return getGridText();
-		}
-		if(command.contains("clear")) {
-			if(command.length() < 6) {
-				for(int i = 0; i < numberOfRows; i++) {
-					for(int j = 0; j < numberOfColumns ; j++) {
-						spreadsheet [i][j] = new EmptyCell();
+	else {
+				if(command.contains("=")){
+					String Location = command.substring(0, (command.indexOf("=") - 1));
+					SpreadsheetLocation cell = new SpreadsheetLocation(command);
+					Cell input = new TextCell(command.substring(command.indexOf("=") + 2, command.length() - 1));
+					spreadsheet[cell.getRow()][cell.getCol()] = input;
+					printCommand = this.getGridText();
+				}
+				if(command.contains("clear")) {
+					if(command.length() < 6) {
+						for(int i = 0; i < numberOfRows; i++) {
+							for(int j = 0; j < numberOfColumns ; j++) {
+								spreadsheet [i][j] = new EmptyCell();
+								printCommand = this.getGridText();
+							}
+						}
 					}
+				else {
+					SpreadsheetLocation clear = new SpreadsheetLocation(command.substring(command.lastIndexOf("clear") + 2, command.length() - 1));
+					spreadsheet[clear.getRow()][clear.getCol()] = new EmptyCell();
+					printCommand = this.getGridText();
 				}
 			}
-			else {
-				SpreadsheetLocation clear = new SpreadsheetLocation(command.substring(command.lastIndexOf("clear") + 2, command.length() - 1));
-				spreadsheet[clear.getRow()][clear.getCol()] = new EmptyCell();
-			}
 		}
-		
-		if(command == "quit") {
-			return "Done";
-		}
-		return command;
+		return printCommand;
 	}
 
 	public int getRows(){
@@ -66,7 +68,7 @@ public class Spreadsheet implements Grid{
 		String grid = "";
 		char charCounter = 'A';
 		int rowCounter = 1;
-		for(int row = 0; row < 23; row++) {
+		for(int row = 0; row < 21; row++) {
 			for(int column = 0; column < 13; column++) {
 				if(row == 0) {
 					if(column == 0) {
@@ -100,5 +102,4 @@ public class Spreadsheet implements Grid{
 		}
 		return grid;
 	}
-
-}
+}	

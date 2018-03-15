@@ -13,6 +13,7 @@ public class TextExcel{
 		
 		Spreadsheet gridTest = new Spreadsheet();
 		System.out.println(gridTest.getGridText());
+		System.out.println(gridTest.getGridText());
 		
 		Spreadsheet MainSpreadSheet = new Spreadsheet();
 		Scanner userInput  = new Scanner(System.in);
