@@ -9,13 +9,14 @@ public class TextCell implements Cell{
 	}
 	
 	public String abbreviatedCellText() {
-		if(this.text.length() > 10) {
-			text = text.substring(0,9);
+		String abbreviatedText = "";
+		if(text.length() > 10) {
+			abbreviatedText = text.substring(1,11);
 		}
-		return text;
+		return abbreviatedText;
 	}
 
 	public String fullCellText() {
-		return "\"" + text + "\"";
+		return text + "\"";
 	}
 }

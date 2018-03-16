@@ -25,10 +25,10 @@ public class Spreadsheet implements Grid{
 			Cell print = getCell(contents);
 			printCommand = print.fullCellText();
 		}
-	else {
+		else {
 				if(command.contains("=")){
-					String Location = command.substring(0, (command.indexOf("=") - 1));
-					SpreadsheetLocation cell = new SpreadsheetLocation(command);
+					String location = command.substring(0, (command.indexOf("=") - 1));
+					SpreadsheetLocation cell = new SpreadsheetLocation(location);
 					Cell input = new TextCell(command.substring(command.indexOf("=") + 2, command.length() - 1));
 					spreadsheet[cell.getRow()][cell.getCol()] = input;
 					printCommand = this.getGridText();
@@ -42,13 +42,13 @@ public class Spreadsheet implements Grid{
 							}
 						}
 					}
-				else {
-					SpreadsheetLocation clear = new SpreadsheetLocation(command.substring(command.lastIndexOf("clear") + 2, command.length() - 1));
-					spreadsheet[clear.getRow()][clear.getCol()] = new EmptyCell();
-					printCommand = this.getGridText();
+					else {
+						SpreadsheetLocation clear = new SpreadsheetLocation(command.substring(command.lastIndexOf("clear") + 2, command.length()));
+						spreadsheet[clear.getRow()][clear.getCol()] = new EmptyCell();
+						printCommand = this.getGridText();
+					}
 				}
 			}
-		}
 		return printCommand;
 	}
 
