@@ -21,6 +21,7 @@ public class Spreadsheet implements Grid{
 			printCommand = "quit";
 		}
 		if(command.length() <= 3 && command.length() != 0) {
+			command.toUpperCase();
 			SpreadsheetLocation contents = new SpreadsheetLocation(command);
 			Cell print = getCell(contents);
 			printCommand = print.fullCellText();
@@ -28,12 +29,14 @@ public class Spreadsheet implements Grid{
 		else {
 				if(command.contains("=")){
 					String location = command.substring(0, (command.indexOf("=") - 1));
+					location.toUpperCase();
 					SpreadsheetLocation cell = new SpreadsheetLocation(location);
-					Cell input = new TextCell(command.substring(command.indexOf("=") + 2, command.length() - 1));
-					spreadsheet[cell.getRow()][cell.getCol()] = input;
+					String input = (command.substring(command.indexOf("=") + 2, command.length() - 1));
+					Cell create = new TextCell(input);
+					spreadsheet[cell.getRow()][cell.getCol()] = create;
 					printCommand = this.getGridText();
 				}
-				if(command.contains("clear")) {
+				if(command.toLowerCase().contains("clear")) {
 					if(command.length() < 6) {
 						for(int i = 0; i < numberOfRows; i++) {
 							for(int j = 0; j < numberOfColumns ; j++) {
@@ -43,7 +46,7 @@ public class Spreadsheet implements Grid{
 						}
 					}
 					else {
-						SpreadsheetLocation clear = new SpreadsheetLocation(command.substring(command.lastIndexOf("clear") + 2, command.length()));
+						SpreadsheetLocation clear = new SpreadsheetLocation(command.substring(6, command.length()));
 						spreadsheet[clear.getRow()][clear.getCol()] = new EmptyCell();
 						printCommand = this.getGridText();
 					}
