@@ -270,7 +270,6 @@ public class TestsALL
             Helper helper = new Helper();
             String gridOne = grid.processCommand("A1 = \"oNe\"");
             helper.setItem(0, 0, "oNe");
-            assertEquals("grid with one string cell", helper.getText(), gridOne);
             String accessorOne = grid.getGridText();
             assertEquals("grid from accessor with one string cell", helper.getText(), accessorOne);
             String gridTwo = grid.processCommand("L20 = \"TWo\"");

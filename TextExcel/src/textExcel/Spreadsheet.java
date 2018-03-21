@@ -20,21 +20,29 @@ public class Spreadsheet implements Grid{
 		if(command == "quit") {
 			printCommand = "quit";
 		}
-		if(command.length() <= 3 && command.length() != 0) {
-			command.toUpperCase();
-			SpreadsheetLocation contents = new SpreadsheetLocation(command);
-			Cell print = getCell(contents);
-			printCommand = print.fullCellText();
-		}
 		else {
+			if(command.length() <= 3 && command.length() != 0) {
+				command.toUpperCase();
+				SpreadsheetLocation contents = new SpreadsheetLocation(command);
+				Cell print = getCell(contents);
+				printCommand = print.fullCellText();
+			}
+			else {
 				if(command.contains("=")){
-					String location = command.substring(0, (command.indexOf("=") - 1));
-					location.toUpperCase();
-					SpreadsheetLocation cell = new SpreadsheetLocation(location);
-					String input = (command.substring(command.indexOf("=") + 2, command.length() - 1));
-					Cell create = new TextCell(input);
-					spreadsheet[cell.getRow()][cell.getCol()] = create;
-					printCommand = this.getGridText();
+					String[] components = command.split(" ", 3);
+					SpreadsheetLocation cell = new SpreadsheetLocation(components[0].toUpperCase());
+					String withQuotes = components[2].substring(0, components[2].length());
+					if(components[2].contains("\"")) {
+						String[] withoutQuotes = withQuotes.split("\"", 3);
+						TextCell create = new TextCell("\"" + withoutQuotes[1]);
+						spreadsheet[cell.getRow()][cell.getCol()] = create;
+						printCommand = this.getGridText();
+					}
+					else {
+						TextCell create = new TextCell(withQuotes);
+						spreadsheet[cell.getRow()][cell.getCol()] = create;
+						printCommand = this.getGridText();
+					}
 				}
 				if(command.toLowerCase().contains("clear")) {
 					if(command.length() < 6) {
@@ -52,6 +60,7 @@ public class Spreadsheet implements Grid{
 					}
 				}
 			}
+		}
 		return printCommand;
 	}
 
@@ -69,40 +78,37 @@ public class Spreadsheet implements Grid{
 	
 	public String getGridText(){
 		String grid = "";
-		char charCounter = 'A';
-		int rowCounter = 1;
+		char columnCount = 'A';
 		for(int row = 0; row < 21; row++) {
 			for(int column = 0; column < 13; column++) {
 				if(row == 0) {
 					if(column == 0) {
 						grid += "   |";
 					}
-					else{
-						grid += ""+ charCounter + "         |";
-						charCounter++;
+					else {
+					grid += "" + columnCount + "         |";
+					columnCount++;	
 					}
 				}
-				if(0 < row && row < 10){
-					if(column == 0) {
-						grid += "" + rowCounter + "  |";
-						rowCounter++;
+				else {
+					if (column == 0) {
+						if(row < 10) {
+							grid += "" + row + "  |";
+						}
+						else {
+							grid += "" + row + " |";
+						}
+						
 					}
-					else{
-						grid += "          |";
+					else {
+						String test = spreadsheet[row - 1][column - 1].abbreviatedCellText();
+						grid += test + "|";
 					}
-				}
-				if(9 < row && row < 21){
-					if(column == 0) {
-						grid += "" + rowCounter + " |";
-						rowCounter++;
-					}
-					else{
-						grid += "          |";
-					}
-				}
 			}
-			grid += "\n";
 		}
-		return grid;
+			
+		grid += "\n";
+	}
+	return grid;
 	}
 }	

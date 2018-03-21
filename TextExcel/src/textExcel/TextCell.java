@@ -13,6 +13,11 @@ public class TextCell implements Cell{
 		if(text.length() > 10) {
 			abbreviatedText = text.substring(1,11);
 		}
+		else {
+			for(int i = 0; i < 10; i++) {
+				abbreviatedText += " ";
+			}
+		}
 		return abbreviatedText;
 	}
 
