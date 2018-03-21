@@ -37,6 +37,7 @@ public class Spreadsheet implements Grid{
 						TextCell create = new TextCell("\"" + withoutQuotes[1]);
 						spreadsheet[cell.getRow()][cell.getCol()] = create;
 						printCommand = this.getGridText();
+						System.out.println(withoutQuotes[1]);
 					}
 					else {
 						TextCell create = new TextCell(withQuotes);
