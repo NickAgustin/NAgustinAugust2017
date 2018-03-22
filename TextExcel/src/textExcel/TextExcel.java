@@ -9,7 +9,8 @@ public class TextExcel{
 
 	public static void main(String[] args) {
 		Spreadsheet MainSpreadSheet = new Spreadsheet();
-		System.out.println(MainSpreadSheet.getGridText());
+		String location = "b5";
+		System.out.println(location.toUpperCase());
 		Scanner userInput  = new Scanner(System.in);
 		String test = "";
 		while(!(test == "quit")) {

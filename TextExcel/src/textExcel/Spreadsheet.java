@@ -7,11 +7,11 @@ public class Spreadsheet implements Grid{
 	private static int numberOfRows = 20;
 	private static int numberOfColumns = 12;
 	private String printCommand = "";
-	static Cell [][] spreadsheet = new Cell[numberOfRows][numberOfColumns];
+	static Cell [][] spreadsheet = new Cell[21][13];
 
 	public Spreadsheet() {
-		for(int i = 0; i < numberOfRows; i++) {
-			for(int j = 0; j < numberOfColumns ; j++) {
+		for(int i = 0; i < 21; i++) {
+			for(int j = 0; j < 13; j++) {
 				spreadsheet [i][j] = new EmptyCell();
 			}
 		}
@@ -21,46 +21,50 @@ public class Spreadsheet implements Grid{
 			printCommand = "quit";
 		}
 		else {
-			if(command.length() <= 3 && command.length() != 0) {
-				command.toUpperCase();
-				SpreadsheetLocation contents = new SpreadsheetLocation(command);
-				Cell print = getCell(contents);
-				printCommand = print.fullCellText();
-			}
-			else {
-				if(command.contains("=")){
-					String[] components = command.split(" ", 3);
-					SpreadsheetLocation cell = new SpreadsheetLocation(components[0].toUpperCase());
-					String withQuotes = components[2].substring(0, components[2].length());
-					if(components[2].contains("\"")) {
-						String[] withoutQuotes = withQuotes.split("\"", 3);
-						TextCell create = new TextCell("\"" + withoutQuotes[1]);
-						spreadsheet[cell.getRow()][cell.getCol()] = create;
-						printCommand = this.getGridText();
-						System.out.println(withoutQuotes[1]);
-					}
-					else {
-						TextCell create = new TextCell(withQuotes);
-						spreadsheet[cell.getRow()][cell.getCol()] = create;
-						printCommand = this.getGridText();
-					}
-				}
-				if(command.toLowerCase().contains("clear")) {
-					if(command.length() < 6) {
-						for(int i = 0; i < numberOfRows; i++) {
-							for(int j = 0; j < numberOfColumns ; j++) {
-								spreadsheet [i][j] = new EmptyCell();
-								printCommand = this.getGridText();
-							}
+			if(command.toLowerCase().equals("clear")) {
+				if(command.length() < 6) {
+					for(int i = 0; i < numberOfRows; i++) {
+						for(int j = 0; j < numberOfColumns ; j++) {
+							spreadsheet [i][j] = new EmptyCell();
+							printCommand = this.getGridText();
 						}
 					}
-					else {
+				}
+			}
+				else {
+					if(command.toLowerCase().contains("clear ")) {
 						SpreadsheetLocation clear = new SpreadsheetLocation(command.substring(6, command.length()));
 						spreadsheet[clear.getRow()][clear.getCol()] = new EmptyCell();
 						printCommand = this.getGridText();
+				}
+					else{
+						if(command.length() <= 3 && command.length() != 0) {
+						command.toUpperCase();
+						SpreadsheetLocation contents = new SpreadsheetLocation(command);
+						Cell print = getCell(contents);
+						printCommand = print.fullCellText();
+					}
+						else {
+							if(command.contains("=")){
+								String[] components = command.split(" ", 3);
+								SpreadsheetLocation cell = new SpreadsheetLocation(components[0].toUpperCase());
+								String withQuotes = components[2].substring(0, components[2].length());
+								if(components[2].contains("\"")) {
+									String[] withoutQuotes = withQuotes.split("\"", 3);
+									TextCell create = new TextCell("\"" + withoutQuotes[1]);
+									spreadsheet[cell.getRow()][cell.getCol()] = create;
+									printCommand = this.getGridText();
+									System.out.println(withoutQuotes[1]);
+								}
+								else {
+									TextCell create = new TextCell(withQuotes);
+									spreadsheet[cell.getRow() + 1][cell.getCol() + 1] = create;
+									printCommand = this.getGridText();
+								}
+							}
+						}
 					}
 				}
-			}
 		}
 		return printCommand;
 	}
