@@ -34,7 +34,7 @@ public class Spreadsheet implements Grid{
 				else {
 					if(command.toLowerCase().contains("clear ")) {
 						SpreadsheetLocation clear = new SpreadsheetLocation(command.substring(6, command.length()));
-						spreadsheet[clear.getRow()][clear.getCol()] = new EmptyCell();
+						spreadsheet[clear.getRow() + 1][clear.getCol() + 1] = new EmptyCell();
 						printCommand = this.getGridText();
 				}
 					else{
@@ -47,20 +47,13 @@ public class Spreadsheet implements Grid{
 						else {
 							if(command.contains("=")){
 								String[] components = command.split(" ", 3);
-								SpreadsheetLocation cell = new SpreadsheetLocation(components[0].toUpperCase());
+								components[0].toUpperCase();
+								SpreadsheetLocation cell = new SpreadsheetLocation(components[0]);
 								String withQuotes = components[2].substring(0, components[2].length());
-								if(components[2].contains("\"")) {
-									String[] withoutQuotes = withQuotes.split("\"", 3);
-									TextCell create = new TextCell("\"" + withoutQuotes[1]);
-									spreadsheet[cell.getRow()][cell.getCol()] = create;
-									printCommand = this.getGridText();
-									System.out.println(withoutQuotes[1]);
-								}
-								else {
-									TextCell create = new TextCell(withQuotes);
-									spreadsheet[cell.getRow() + 1][cell.getCol() + 1] = create;
-									printCommand = this.getGridText();
-								}
+								String[] withoutQuotes = withQuotes.split("\"", 3);
+								TextCell create = new TextCell("\"" + withoutQuotes[1]);
+								spreadsheet[cell.getRow() + 1][cell.getCol() + 1] = create;
+								printCommand = this.getGridText();
 							}
 						}
 					}
@@ -78,7 +71,7 @@ public class Spreadsheet implements Grid{
 	}
 
 	public Cell getCell(Location loc){
-		return spreadsheet[loc.getRow()][loc.getCol()];
+		return spreadsheet[loc.getRow() + 1][loc.getCol() + 1];
 	}
 	
 	public String getGridText(){
@@ -106,7 +99,7 @@ public class Spreadsheet implements Grid{
 						
 					}
 					else {
-						String test = spreadsheet[row - 1][column - 1].abbreviatedCellText();
+						String test = spreadsheet[row][column].abbreviatedCellText();
 						grid += test + "|";
 					}
 			}

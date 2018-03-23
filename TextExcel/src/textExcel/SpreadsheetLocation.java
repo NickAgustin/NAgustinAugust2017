@@ -11,7 +11,7 @@ public class SpreadsheetLocation implements Location{
 	private String location;
 
 	public int getRow(){
-		this.rowNumber = Integer.parseInt(location.substring(1));
+		this.rowNumber = Integer.parseInt(location.substring(1, location.length()));
 		return rowNumber - 1;
 	}
 
