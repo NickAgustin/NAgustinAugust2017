@@ -45,14 +45,41 @@ public class Spreadsheet implements Grid{
 						printCommand = print.fullCellText();
 					}
 						else {
-							if(command.contains("=")){
+							if(command.contains("%")) {
 								String[] components = command.split(" ", 3);
 								components[0].toUpperCase();
 								SpreadsheetLocation cell = new SpreadsheetLocation(components[0]);
-								TextCell create = new TextCell(components[2].substring(0, components[2].length()));
+								PercentCell create = new PercentCell(components[2].substring(0, components[2].length() - 1));
 								spreadsheet[cell.getRow() + 1][cell.getCol() + 1] = create;
-								System.out.println(cell.getRow() + " + " + cell.getCol());
 								printCommand = this.getGridText();
+							}
+							else {
+								if(command.contains(".")) {
+									String[] components = command.split(" ", 3);
+									components[0].toUpperCase();
+									SpreadsheetLocation cell = new SpreadsheetLocation(components[0]);
+									ValueCell create = new ValueCell(components[2].substring(0, components[2].length()));
+									spreadsheet[cell.getRow() + 1][cell.getCol() + 1] = create;
+									printCommand = this.getGridText();
+								}
+								else {
+									if(command.contains("(")) {
+										String[] components = command.split(" ", 3);
+										components[0].toUpperCase();
+										SpreadsheetLocation cell = new SpreadsheetLocation(components[0]);
+										FormulaCell create = new FormulaCell(components[2].substring(0, components[2].length()));
+										spreadsheet[cell.getRow() + 1][cell.getCol() + 1] = create;
+										printCommand = this.getGridText();
+									}
+									else{
+										String[] components = command.split(" ", 3);
+										components[0].toUpperCase();
+										SpreadsheetLocation cell = new SpreadsheetLocation(components[0]);
+										TextCell create = new TextCell(components[2].substring(0, components[2].length()));
+										spreadsheet[cell.getRow() + 1][cell.getCol() + 1] = create;
+										printCommand = this.getGridText();
+									}
+								}
 							}
 						}
 					}
@@ -71,6 +98,11 @@ public class Spreadsheet implements Grid{
 
 	public Cell getCell(Location loc){
 		return spreadsheet[loc.getRow() + 1][loc.getCol() + 1];
+	}
+	
+	public boolean isAnInteger(String value) {
+		for(int i )
+		return false;
 	}
 	
 	public String getGridText(){

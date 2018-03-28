@@ -9,7 +9,7 @@ public class RealCell implements Cell {
 	}
 	
 	public String fullCellText() {
-		return null;
+		return initialValue;
 	}
 	
 	public double getDouble() {

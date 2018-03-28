@@ -2,14 +2,15 @@ package textExcel;
 
 public class ValueCell extends RealCell {
 	
-	public double value;
+	private String value;
 	
-	public ValueCell (double value){
+	public ValueCell (String value){
 		this.value = value;
 	}
 	
 	public String abbreviatedCellText() {
 		String truncated = "" + value;
+		boolean endsInZero = false;
 		if(truncated.contains(".")) {
 			if(truncated.length() > 10) {
 				truncated = truncated.substring(0,10);
@@ -21,7 +22,10 @@ public class ValueCell extends RealCell {
 			}
 		}
 		else {
-			truncated = truncated + ".0";
+			truncated += ".0";
+			for(int i = 0; truncated.length() < 10; i++) {
+				truncated += " ";
+			}
 		}
 		return truncated;
 	}
@@ -29,5 +33,4 @@ public class ValueCell extends RealCell {
 	public double getDouble() {
 		return 0;
 	}
-	
 }
