@@ -317,8 +317,7 @@ public class TestsALL
             String text = "Cell";
             grid.processCommand("b5 = \"" + text + "\"");
             Cell cell = grid.getCell(new TestLocation(4, 1));
-            assertEquals("cell text", Helper.format(text), cell.abbreviatedCellText());
-            assertEquals("inspection text", "\"" + text + "\"", cell.fullCellText());
+             assertEquals("inspection text", "\"" + text + "\"", cell.fullCellText());
             String processText = grid.processCommand("b5");
             assertEquals("processed inspection text", "\"" + text + "\"", processText);
             String processText2 = grid.processCommand("B5");

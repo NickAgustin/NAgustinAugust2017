@@ -23,8 +23,8 @@ public class Spreadsheet implements Grid{
 		else {
 			if(command.toLowerCase().equals("clear")) {
 				if(command.length() < 6) {
-					for(int i = 0; i < numberOfRows; i++) {
-						for(int j = 0; j < numberOfColumns ; j++) {
+					for(int i = 0; i < 21; i++) {
+						for(int j = 0; j < 13 ; j++) {
 							spreadsheet [i][j] = new EmptyCell();
 							printCommand = this.getGridText();
 						}
@@ -49,10 +49,9 @@ public class Spreadsheet implements Grid{
 								String[] components = command.split(" ", 3);
 								components[0].toUpperCase();
 								SpreadsheetLocation cell = new SpreadsheetLocation(components[0]);
-								String withQuotes = components[2].substring(0, components[2].length());
-								String[] withoutQuotes = withQuotes.split("\"", 3);
-								TextCell create = new TextCell("\"" + withoutQuotes[1]);
+								TextCell create = new TextCell(components[2].substring(0, components[2].length()));
 								spreadsheet[cell.getRow() + 1][cell.getCol() + 1] = create;
+								System.out.println(cell.getRow() + " + " + cell.getCol());
 								printCommand = this.getGridText();
 							}
 						}
